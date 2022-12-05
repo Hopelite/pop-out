@@ -29,7 +29,7 @@ public class CharacterController : MonoBehaviour
 
     void Update()
     {
-        transform.position += new Vector3(Input.GetAxis(playerName + "Horizontal"), Input.GetAxis(playerName + "Vertical"), 0f)
+        transform.position += new Vector3(Input.GetAxis(playerName + "Horizontal"), 0.0f, 0.0f)
         * movementSpeed
         * Time.deltaTime;
 
@@ -40,12 +40,6 @@ public class CharacterController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Coin"))
-        {
-            numberOfCoins++;
-            Destroy(collision.gameObject);
-        }
-
         if (collision.gameObject.CompareTag("Finger"))
         {
             Debug.Log($"'{playerName}' is hit by finger!");

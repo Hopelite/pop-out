@@ -6,7 +6,7 @@ public class FingerController : MonoBehaviour
 {
     private float spawnPositionY;
     private bool isMovingDown = true;
-    public float speed = 1.0f;
+    public float speed;
     public float destinationY;
 
     void Start()
