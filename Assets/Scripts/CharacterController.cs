@@ -2,22 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    float movementSpeed = 10f;
-
+    Rigidbody2D playerRigidBody;
+    Collider2D playerCollider;
     float minX;
     float maxX;
     float minY;
     float maxY;
 
-    public int numberOfCoins;
-
     public string playerName;
-
+    public Collider2D anotherPlayerCollider;
+    public float pushVelocity;
+    public float movementSpeed = 10f;
 
     private void Start()
     {
+        playerRigidBody = GetComponent<Rigidbody2D>();
+        playerCollider = GetComponent<Collider2D>();
+
         Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0f, 0f, 0f));
         Vector3 topRight = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 0f));
 
@@ -25,14 +28,14 @@ public class CharacterController : MonoBehaviour
         maxX = topRight.x;
         minY = bottomLeft.y;
         maxY = topRight.y;
+
+        // Ignore collision between players
+        Physics2D.IgnoreCollision(playerCollider, anotherPlayerCollider);
     }
 
     void Update()
     {
-        transform.position += new Vector3(Input.GetAxis(playerName + "Horizontal"), 0.0f, 0.0f)
-        * movementSpeed
-        * Time.deltaTime;
-
+        transform.position += new Vector3(Input.GetAxis(playerName + "Horizontal"), 0.0f, 0.0f) * movementSpeed * Time.deltaTime;
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX),
                                          Mathf.Clamp(transform.position.y, minY, maxY),
                                          0f);
@@ -42,7 +45,18 @@ public class CharacterController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Finger"))
         {
-            Debug.Log($"'{playerName}' is hit by finger!");
+            // Get direction of hit
+            float hitDirection = collision.transform.position.x - transform.position.x;
+
+            // If hit from the left - push to the right
+            if (hitDirection > 0)
+            {
+                playerRigidBody.AddForce(Vector2.left * pushVelocity, ForceMode2D.Impulse);
+            }
+            else // If hit from the right - push to the left
+            {
+                playerRigidBody.AddForce(Vector2.right * pushVelocity, ForceMode2D.Impulse);
+            }
         }
     }
 }
