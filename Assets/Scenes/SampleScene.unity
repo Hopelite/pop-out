@@ -320,8 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6a8fcb629ed1df4f825b20672ae004f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinPrefab: {fileID: 1623084036278499486, guid: a8d80c4a37e6c884196a44f43732af94, type: 3}
-  fingerPrefab: {fileID: 0}
+  fingerPrefab: {fileID: 2063461699455501197, guid: 2d0e08a587640054ea7d77e5f085bc4d, type: 3}
 --- !u!4 &536687122
 Transform:
   m_ObjectHideFlags: 0
@@ -419,7 +418,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &1730060622 stripped
 CircleCollider2D:
@@ -542,71 +541,6 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 4036246278101528838, guid: 0f6cc0f404b9e364fb459d9d9614a1ff, type: 3}
   m_PrefabInstance: {fileID: 1832995751}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &2063461698957365119
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2063461699455501195, guid: 2d0e08a587640054ea7d77e5f085bc4d, type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2063461699455501195, guid: 2d0e08a587640054ea7d77e5f085bc4d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.97
-      objectReference: {fileID: 0}
-    - target: {fileID: 2063461699455501195, guid: 2d0e08a587640054ea7d77e5f085bc4d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 14.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2063461699455501195, guid: 2d0e08a587640054ea7d77e5f085bc4d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2063461699455501195, guid: 2d0e08a587640054ea7d77e5f085bc4d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 2063461699455501195, guid: 2d0e08a587640054ea7d77e5f085bc4d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2063461699455501195, guid: 2d0e08a587640054ea7d77e5f085bc4d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2063461699455501195, guid: 2d0e08a587640054ea7d77e5f085bc4d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 2063461699455501195, guid: 2d0e08a587640054ea7d77e5f085bc4d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2063461699455501195, guid: 2d0e08a587640054ea7d77e5f085bc4d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2063461699455501195, guid: 2d0e08a587640054ea7d77e5f085bc4d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 2063461699455501197, guid: 2d0e08a587640054ea7d77e5f085bc4d, type: 3}
-      propertyPath: m_Name
-      value: Finger
-      objectReference: {fileID: 0}
-    - target: {fileID: 3770536750710669572, guid: 2d0e08a587640054ea7d77e5f085bc4d, type: 3}
-      propertyPath: speed
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3770536750710669572, guid: 2d0e08a587640054ea7d77e5f085bc4d, type: 3}
-      propertyPath: destinationY
-      value: 5
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2d0e08a587640054ea7d77e5f085bc4d, type: 3}
 --- !u!1001 &4036246276589582256
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -31,8 +31,9 @@ public class FingerController : MonoBehaviour
             // If finger is on the start position or higher
             if (transform.position.y >= spawnPositionY)
             {
-                isMovingDown = true;
-                //Destroy(gameObject);
+                GameController.isFingerDestroyed = true;
+                //isMovingDown = true;
+                Destroy(gameObject);
             }
 
             transform.position += Vector3.up * speed;

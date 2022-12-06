@@ -1,29 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class gameController : MonoBehaviour
+public class GameController : MonoBehaviour
 {
-    float coinTimer = 0f;
-    public GameObject coinPrefab;
     public GameObject fingerPrefab;
+    public static bool isFingerDestroyed = true; // Static - means can be accessed without object instance
+
+    float minX;
+    float maxX;
 
     void Start()
     {
-        
+        // Get the max left and the max right positions
+        Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0f, 0f, 0f));
+        Vector3 topRight = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 0f));
+
+        minX = bottomLeft.x;
+        maxX = topRight.x;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //coinTimer += 1f * Time.deltaTime;
-        //if (coinTimer >= 0.3f)
-        //{
-        //    GameObject newCoin = Instantiate(coinPrefab);
-        //    float randomX = Random.Range(-5f, 5f);
-        //    float randomY = Random.Range(-5f, 5f);
-        //    newCoin.transform.position = new Vector3(randomX, randomY, 0f);
-        //    coinTimer = 0f;
-        //}
+        if (isFingerDestroyed)
+        {
+            GameObject finger = Instantiate(fingerPrefab);
+            float randomHorizontalPosition = Random.Range(minX, maxX);
+            finger.transform.position = new Vector3(randomHorizontalPosition, 14.1f, 0);
+            isFingerDestroyed = false;
+        }
     }
 }
