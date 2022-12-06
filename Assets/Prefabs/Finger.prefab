@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.2
-  destinationY: 4.8
+  destinationY: 7
   maxStayTime: 0.5
 --- !u!70 &253495154844285811
 CapsuleCollider2D:
@@ -114,6 +114,6 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 3.2058043, y: 0.7266472}
-  m_Size: {x: 34.702602, y: 2.9010453}
+  m_Offset: {x: 0.36, y: 0.01}
+  m_Size: {x: 36, y: 3.17}
   m_Direction: 1
