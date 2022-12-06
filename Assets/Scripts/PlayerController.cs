@@ -56,6 +56,8 @@ public class PlayerController : MonoBehaviour
             {
                 playerRigidBody.AddForce(Vector2.right * pushVelocity, ForceMode2D.Impulse);
             }
+
+            // !!! Here is the place where you can add damage and score logic !!!
         }
     }
 }
