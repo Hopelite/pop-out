@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.2
-  destinationY: 5
+  destinationY: 4.8
+  maxStayTime: 0.5
 --- !u!70 &253495154844285811
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

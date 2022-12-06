@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -35,10 +33,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // Move player into the pressed direction
         transform.position += new Vector3(Input.GetAxis(playerName + "Horizontal"), 0.0f, 0.0f) * movementSpeed * Time.deltaTime;
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX),
-                                         Mathf.Clamp(transform.position.y, minY, maxY),
-                                         0f);
+
+        // Move player inside the borders (screen borders), if they leaved them
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX), Mathf.Clamp(transform.position.y, minY, maxY), 0f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
