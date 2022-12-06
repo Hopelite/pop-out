@@ -43,6 +43,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Player
+    uniqueID: 1114561699
+    locked: 0
   - name: Finger
     uniqueID: 2611057749
     locked: 0
