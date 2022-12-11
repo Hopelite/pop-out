@@ -4,6 +4,11 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D playerRigidBody;
     Collider2D playerCollider;
+    float currentInvisibilitySeconds;
+    bool isTakingDamage;
+    bool isOnFloor;
+
+    float rotationAngle = 5.0f;
     float minX;
     float maxX;
     float minY;
@@ -13,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public Collider2D anotherPlayerCollider;
     public float pushVelocity;
     public float movementSpeed = 10f;
+    public float maxInvisibiltySeconds = 1.0f;
 
     private void Start()
     {
@@ -34,15 +40,29 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Move player into the pressed direction
-        transform.position += new Vector3(Input.GetAxis(playerName + "Horizontal"), 0.0f, 0.0f) * movementSpeed * Time.deltaTime;
+        float horizontalInput = Input.GetAxis(playerName + "Horizontal");
+        transform.position += new Vector3(horizontalInput, 0.0f, 0.0f) * movementSpeed * Time.deltaTime;
 
         // Move player inside the borders (screen borders), if they leaved them
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX), Mathf.Clamp(transform.position.y, minY, maxY), 0f);
+
+        // Rotate player towards movement
+        transform.Rotate(Vector3.back, rotationAngle * horizontalInput);
+
+        if (isTakingDamage)
+        {
+            currentInvisibilitySeconds += Time.deltaTime;
+            if (currentInvisibilitySeconds >= maxInvisibiltySeconds)
+            {
+                currentInvisibilitySeconds = 0.0f;
+                isTakingDamage = false;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Finger"))
+        if (!isTakingDamage && collision.gameObject.CompareTag("Finger"))
         {
             // Get direction of hit
             float hitDirection = collision.transform.position.x - transform.position.x;
@@ -58,6 +78,23 @@ public class PlayerController : MonoBehaviour
             }
 
             // !!! Here is the place where you can add damage and score logic !!!
+            isTakingDamage = true;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            isOnFloor = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            isOnFloor = false;
         }
     }
 }

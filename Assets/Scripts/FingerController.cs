@@ -5,10 +5,10 @@ public class FingerController : MonoBehaviour
     float spawnPositionY;
     float stayedTime;
     bool isMovingDown = true;
-    bool isStaying = false;
+    bool isOnFloor = false;
 
     public float speed;
-    public float destinationY;
+    public float lowestVerticalPosition;
     public float maxStayTime;
 
     void Start()
@@ -18,26 +18,26 @@ public class FingerController : MonoBehaviour
 
     void Update()
     {
-        if (isMovingDown && transform.position.y > destinationY)
+        if (isMovingDown && transform.position.y > lowestVerticalPosition)
         {
             transform.position -= Vector3.up * speed;
         }
 
-        if (isMovingDown && transform.position.y <= destinationY)
+        if (isMovingDown && transform.position.y <= lowestVerticalPosition)
         {
             isMovingDown = false;
-            isStaying = true;
+            isOnFloor = true;
         }
 
         if (!isMovingDown)
         {
             // Check, if finger is pressing the floor
-            if (isStaying)
+            if (isOnFloor)
             {
                 stayedTime += 1.0f * Time.deltaTime;
                 if (stayedTime >= maxStayTime) // Check, if press time is out
                 {
-                    isStaying = false;
+                    isOnFloor = false;
                     stayedTime = 0.0f;
                 }
 

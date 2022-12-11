@@ -4,9 +4,11 @@ public class GameController : MonoBehaviour
 {
     public GameObject fingerPrefab;
     public static bool isFingerDestroyed = true; // Static - means can be accessed without object instance
+    public float spawnDelay = 0.5f;
 
     float minX;
     float maxX;
+    float currentDelay = 0.0f;
 
     void Start()
     {
@@ -22,10 +24,15 @@ public class GameController : MonoBehaviour
     {
         if (isFingerDestroyed)
         {
-            GameObject finger = Instantiate(fingerPrefab);
-            float randomHorizontalPosition = Random.Range(minX, maxX);
-            finger.transform.position = new Vector3(randomHorizontalPosition, 14.1f, 0);
-            isFingerDestroyed = false;
+            currentDelay += Time.deltaTime;
+            if (currentDelay >= spawnDelay)
+            {
+                currentDelay = 0.0f;
+                GameObject finger = Instantiate(fingerPrefab);
+                float randomHorizontalPosition = Random.Range(minX, maxX);
+                finger.transform.position = new Vector3(randomHorizontalPosition, 14.1f, 0);
+                isFingerDestroyed = false;
+            }
         }
     }
 }
