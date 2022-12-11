@@ -5,8 +5,10 @@ public class PlayerController : MonoBehaviour
     float secondsInInvicibility = 0.5f;
     public string playerName;
     public float movementSpeed = 10f;
+     
 
-    Rigidbody2D playerRigidBody;
+
+
     float currentInvisibilitySeconds;
     bool isTakingDamage;
     bool isOnFloor;
@@ -23,8 +25,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        playerRigidBody = GetComponent<Rigidbody2D>();
-
         Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0f, 0f, 0f));
         Vector3 topRight = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 0f));
 
@@ -61,19 +61,6 @@ public class PlayerController : MonoBehaviour
     {
         if (!isTakingDamage && collision.gameObject.CompareTag("Finger"))
         {
-            // Get direction of hit
-            float hitDirection = collision.transform.position.x - transform.position.x;
-
-            // If hit from the left - push to the right
-            if (hitDirection > 0)
-            {
-                playerRigidBody.AddForce(Vector2.left * pushVelocity, ForceMode2D.Impulse);
-            }
-            else // If hit from the right - push to the left
-            {
-                playerRigidBody.AddForce(Vector2.right * pushVelocity, ForceMode2D.Impulse);
-            }
-
             // !!! Here is the place where you can add damage and score logic !!!
             isTakingDamage = true;
         }
