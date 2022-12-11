@@ -3,8 +3,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D playerRigidBody;
+    bool isOnFloor;
+
     public string playerName;
-    public float rotationSpeed = 50f;
+    public float horizontalSpeed = 50f;
+    public float jumpSpeed = 20f;
 
 
 
@@ -12,7 +15,6 @@ public class PlayerController : MonoBehaviour
     float secondsInInvicibility = 0.5f;
     float currentInvisibilitySeconds;
     bool isTakingDamage;
-    bool isOnFloor;
 
     float minX;
     float maxX;
@@ -38,7 +40,17 @@ public class PlayerController : MonoBehaviour
         // Where -1.0 stands for the max RIGHT input, and 1.0 for the LEFT one
         // 0.0 means player stands in place
         float horizontalInput = Input.GetAxis(playerName + "Horizontal");
-        playerRigidBody.AddTorque(-1 * rotationSpeed * horizontalInput);
+        playerRigidBody.AddTorque(-1 * horizontalSpeed * horizontalInput);
+        playerRigidBody.AddForce(Vector2.right * horizontalSpeed * horizontalInput);
+
+        if (isOnFloor)
+        {
+            float verticalInput = Input.GetAxis(playerName + "Vertical");
+            if (verticalInput > 0f)
+            {
+                playerRigidBody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+            }
+        }
 
         // Move player inside the borders (screen borders), if they leaved them
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX), Mathf.Clamp(transform.position.y, minY, maxY), 0f);

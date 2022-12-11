@@ -102,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: Player2
   rotationSpeed: 70
+  jumpSpeed: 20
 --- !u!50 &1621194531079802168
 Rigidbody2D:
   serializedVersion: 4
