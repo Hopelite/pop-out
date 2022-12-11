@@ -1,30 +1,28 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    float secondsInInvicibility = 0.5f;
-    public string playerName;
-    public float movementSpeed = 10f;
-
     Rigidbody2D playerRigidBody;
+    float maxSecondsInInvicibility = 0.5f;
     float currentInvisibilitySeconds;
+    public int currentHp;
     bool isTakingDamage;
     bool isOnFloor;
 
-    float rotationAngle = 5.0f;
+    public string playerName;
+    public int maxHp = 3;
+    public float horizontalSpeed = 50f;
+    public float jumpSpeed = 10f;
+    public List<GameObject> hitPoints;
+
     float minX;
     float maxX;
     float minY;
     float maxY;
 
-
-
-    public float pushVelocity;
-
     private void Start()
     {
-        playerRigidBody = GetComponent<Rigidbody2D>();
-
         Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0f, 0f, 0f));
         Vector3 topRight = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 0f));
 
@@ -32,50 +30,40 @@ public class PlayerController : MonoBehaviour
         maxX = topRight.x;
         minY = bottomLeft.y;
         maxY = topRight.y;
+
+        currentHp = maxHp;
+        playerRigidBody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        // Move player into the pressed direction
+        // Get the horizontal player's input. Value is between -1.0 to 1.0
+        // Where -1.0 stands for the max RIGHT input, and 1.0 for the LEFT one
+        // 0.0 means player stands in place
         float horizontalInput = Input.GetAxis(playerName + "Horizontal");
-        transform.position += new Vector3(horizontalInput, 0.0f, 0.0f) * movementSpeed * Time.deltaTime;
+        playerRigidBody.AddTorque(-1 * horizontalSpeed * horizontalInput);
+        playerRigidBody.AddForce(Vector2.right * horizontalSpeed * horizontalInput);
+
+        if (isOnFloor)
+        {
+            float verticalInput = Input.GetAxis(playerName + "Vertical");
+            if (verticalInput > 0f)
+            {
+                playerRigidBody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+            }
+        }
 
         // Move player inside the borders (screen borders), if they leaved them
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX), Mathf.Clamp(transform.position.y, minY, maxY), 0f);
 
-        // Rotate player towards movement
-        transform.Rotate(Vector3.back, rotationAngle * horizontalInput);
-
         if (isTakingDamage)
         {
             currentInvisibilitySeconds += Time.deltaTime;
-            if (currentInvisibilitySeconds >= secondsInInvicibility)
+            if (currentInvisibilitySeconds >= maxSecondsInInvicibility)
             {
                 currentInvisibilitySeconds = 0.0f;
                 isTakingDamage = false;
             }
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!isTakingDamage && collision.gameObject.CompareTag("Finger"))
-        {
-            // Get direction of hit
-            float hitDirection = collision.transform.position.x - transform.position.x;
-
-            // If hit from the left - push to the right
-            if (hitDirection > 0)
-            {
-                playerRigidBody.AddForce(Vector2.left * pushVelocity, ForceMode2D.Impulse);
-            }
-            else // If hit from the right - push to the left
-            {
-                playerRigidBody.AddForce(Vector2.right * pushVelocity, ForceMode2D.Impulse);
-            }
-
-            // !!! Here is the place where you can add damage and score logic !!!
-            isTakingDamage = true;
         }
     }
 
@@ -84,6 +72,30 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Floor"))
         {
             isOnFloor = true;
+        }
+
+        if (!isTakingDamage && collision.gameObject.CompareTag("Finger"))
+        {
+            isTakingDamage = true;
+            currentHp--;
+            if (currentHp >= 0)
+            {
+                if (currentHp != hitPoints.Count - 1)
+                {
+                    Debug.LogError("You forgot to add hit point object to " + playerName + "'s hit points list.");
+                    return;
+                }
+
+                GameObject hitPoint = hitPoints[currentHp];
+                hitPoints.Remove(hitPoint); // Remove life
+                Destroy(hitPoint);
+            }
+
+            if (currentHp <= 0)
+            {
+                // Game over
+                return;
+            }
         }
     }
 
