@@ -138,7 +138,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!212 &224234248
 SpriteRenderer:
@@ -200,7 +200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 224234247}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.029600002, y: 0.10950005, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.45534322, y: 0.42045265, z: 0.4917}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -306,7 +306,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &536687122
 Transform:
@@ -316,7 +316,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 536687120}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.061172485, y: 1.3396934, z: -0.0044837627}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -521,6 +521,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1621194531079802172, guid: ac36cc8a5e65c3e459d368191b1f0dd8, type: 3}
+      propertyPath: movementSpeed
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1621194531079802175, guid: ac36cc8a5e65c3e459d368191b1f0dd8, type: 3}
       propertyPath: m_Name
       value: Player 2
@@ -545,6 +549,10 @@ PrefabInstance:
     - target: {fileID: 4036246278101528834, guid: 0f6cc0f404b9e364fb459d9d9614a1ff, type: 3}
       propertyPath: pushVelocity
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4036246278101528834, guid: 0f6cc0f404b9e364fb459d9d9614a1ff, type: 3}
+      propertyPath: movementSpeed
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4036246278101528836, guid: 0f6cc0f404b9e364fb459d9d9614a1ff, type: 3}
       propertyPath: m_RootOrder

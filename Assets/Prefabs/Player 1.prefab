@@ -101,8 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: Player1
-  movementSpeed: 10
-  pushVelocity: 40
+  rotationSpeed: 70
 --- !u!50 &4036246278101528838
 Rigidbody2D:
   serializedVersion: 4
@@ -123,7 +122,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!58 &4036246278101528837
 CircleCollider2D:
   m_ObjectHideFlags: 0

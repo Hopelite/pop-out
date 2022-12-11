@@ -2,26 +2,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    float secondsInInvicibility = 0.5f;
+    Rigidbody2D playerRigidBody;
     public string playerName;
-    public float movementSpeed = 10f;
-     
+    public float rotationSpeed = 50f;
 
 
 
+
+    float secondsInInvicibility = 0.5f;
     float currentInvisibilitySeconds;
     bool isTakingDamage;
     bool isOnFloor;
 
-    float rotationAngle = 5.0f;
     float minX;
     float maxX;
     float minY;
     float maxY;
-
-
-
-    public float pushVelocity;
 
     private void Start()
     {
@@ -32,37 +28,37 @@ public class PlayerController : MonoBehaviour
         maxX = topRight.x;
         minY = bottomLeft.y;
         maxY = topRight.y;
+
+        playerRigidBody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        // Move player into the pressed direction
+        // Get the horizontal player's input. Value is between -1.0 to 1.0
+        // Where -1.0 stands for the max RIGHT input, and 1.0 for the LEFT one
+        // 0.0 means player stands in place
         float horizontalInput = Input.GetAxis(playerName + "Horizontal");
-        transform.position += new Vector3(horizontalInput, 0.0f, 0.0f) * movementSpeed * Time.deltaTime;
+        playerRigidBody.AddTorque(-1 * rotationSpeed * horizontalInput);
 
         // Move player inside the borders (screen borders), if they leaved them
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX), Mathf.Clamp(transform.position.y, minY, maxY), 0f);
 
-        // Rotate player towards movement
-        transform.Rotate(Vector3.back, rotationAngle * horizontalInput);
-
-        if (isTakingDamage)
-        {
-            currentInvisibilitySeconds += Time.deltaTime;
-            if (currentInvisibilitySeconds >= secondsInInvicibility)
-            {
-                currentInvisibilitySeconds = 0.0f;
-                isTakingDamage = false;
-            }
-        }
+        //if (isTakingDamage)
+        //{
+        //    currentInvisibilitySeconds += Time.deltaTime;
+        //    if (currentInvisibilitySeconds >= secondsInInvicibility)
+        //    {
+        //        currentInvisibilitySeconds = 0.0f;
+        //        isTakingDamage = false;
+        //    }
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!isTakingDamage && collision.gameObject.CompareTag("Finger"))
         {
-            // !!! Here is the place where you can add damage and score logic !!!
-            isTakingDamage = true;
+            //isTakingDamage = true;
         }
     }
 
