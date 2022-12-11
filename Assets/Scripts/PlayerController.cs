@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    float secondsInInvicibility = 0.5f;
+    public string playerName;
+    public float movementSpeed = 10f;
+
     Rigidbody2D playerRigidBody;
-    Collider2D playerCollider;
     float currentInvisibilitySeconds;
     bool isTakingDamage;
     bool isOnFloor;
@@ -14,16 +17,13 @@ public class PlayerController : MonoBehaviour
     float minY;
     float maxY;
 
-    public string playerName;
-    public Collider2D anotherPlayerCollider;
+
+
     public float pushVelocity;
-    public float movementSpeed = 10f;
-    public float maxInvisibiltySeconds = 1.0f;
 
     private void Start()
     {
         playerRigidBody = GetComponent<Rigidbody2D>();
-        playerCollider = GetComponent<Collider2D>();
 
         Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0f, 0f, 0f));
         Vector3 topRight = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 0f));
@@ -32,9 +32,6 @@ public class PlayerController : MonoBehaviour
         maxX = topRight.x;
         minY = bottomLeft.y;
         maxY = topRight.y;
-
-        // Ignore collision between players
-        Physics2D.IgnoreCollision(playerCollider, anotherPlayerCollider);
     }
 
     void Update()
@@ -52,7 +49,7 @@ public class PlayerController : MonoBehaviour
         if (isTakingDamage)
         {
             currentInvisibilitySeconds += Time.deltaTime;
-            if (currentInvisibilitySeconds >= maxInvisibiltySeconds)
+            if (currentInvisibilitySeconds >= secondsInInvicibility)
             {
                 currentInvisibilitySeconds = 0.0f;
                 isTakingDamage = false;

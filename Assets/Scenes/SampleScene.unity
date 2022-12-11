@@ -514,7 +514,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4036246278101528833, guid: 0f6cc0f404b9e364fb459d9d9614a1ff, type: 3}
       propertyPath: m_Name
-      value: Character (1)
+      value: Player 2
       objectReference: {fileID: 0}
     - target: {fileID: 4036246278101528834, guid: 0f6cc0f404b9e364fb459d9d9614a1ff, type: 3}
       propertyPath: playerName
@@ -522,7 +522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4036246278101528834, guid: 0f6cc0f404b9e364fb459d9d9614a1ff, type: 3}
       propertyPath: pushVelocity
-      value: 12
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4036246278101528834, guid: 0f6cc0f404b9e364fb459d9d9614a1ff, type: 3}
       propertyPath: playerRigidBody
@@ -678,7 +678,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4036246278101528833, guid: 0f6cc0f404b9e364fb459d9d9614a1ff, type: 3}
       propertyPath: m_Name
-      value: Character
+      value: Player 1
       objectReference: {fileID: 0}
     - target: {fileID: 4036246278101528834, guid: 0f6cc0f404b9e364fb459d9d9614a1ff, type: 3}
       propertyPath: playerName
